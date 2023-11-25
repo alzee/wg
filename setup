@@ -8,7 +8,7 @@ apt install wireguard -y
 PRIVATEKEY=${PRIVATEKEY:-private_key_not_given}
 wgif=wg-server
 conf=$wgif.conf
-url=https://alz.ee/wg/server.conf
+url=https://raw.githubusercontent.com/alzee/wg/main/server.conf
 
 curl -L $url > $conf
 
