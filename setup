@@ -7,11 +7,9 @@ apt install wireguard -y
 
 # env PRIVATEKEY
 key=${PRIVATEKEY:-private_key_not_given}
-wgif=wg-server
-conf=$wgif.conf
-url=https://wg.alz.ee/server.conf
+conf=wg-server.conf
 
-curl -L $url > $conf
+curl -L https://wg.alz.ee/server.conf > $conf
 
 iface=$(ip r show default | awk '{print $5}')
 
@@ -20,4 +18,4 @@ sed -i s/SERVER_PRIVATEKEY/$key/ $conf
 
 mv $conf /etc/wireguard/
 
-systemctl enable --now wg-quick@$wgif
+systemctl enable --now wg-quick@${conf%.conf}
