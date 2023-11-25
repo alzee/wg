@@ -5,7 +5,8 @@
 apt update
 apt install wireguard -y
 
-PRIVATEKEY=${PRIVATEKEY:-private_key_not_given}
+# env PRIVATEKEY
+key=${PRIVATEKEY:-private_key_not_given}
 wgif=wg-server
 conf=$wgif.conf
 url=https://wg.alz.ee/server.conf
@@ -15,7 +16,7 @@ curl -L $url > $conf
 iface=$(ip r show default | awk '{print $5}')
 
 sed -i s/eth0/$iface/ $conf
-sed -i /PrivateKey/s/XXXXX/$PRIVATEKEY/ $conf
+sed -i s/SERVER_PRIVATEKEY/$key/ $conf
 
 mv $conf /etc/wireguard/
 
