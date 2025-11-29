@@ -7,9 +7,10 @@ apt install wireguard -y
 
 # env PRIVATEKEY
 key=${PRIVATEKEY:-private_key_not_given}
+server=${SERVER:-server}
 conf=wg-server.conf
 
-curl -L https://wg.alz.ee/server.conf > $conf
+curl -L https://wg.alz.ee/$server.conf > $conf
 
 iface=$(ip r show default | awk '{print $5}')
 
