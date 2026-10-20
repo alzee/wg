@@ -20,3 +20,10 @@ sed -i s/SERVER_PRIVATEKEY/$key/ $conf
 mv $conf /etc/wireguard/
 
 systemctl enable --now wg-quick@${conf%.conf}
+
+# dante
+sudo apt install -y dante-server
+sudo cp /etc/danted.conf /etc/danted.conf.bak
+sudo cp ash/conf/etc/danted.conf /etc/danted.conf
+sudo sed -i s/eth0/$iface/ /etc/danted.conf
+sudo systemctl restart danted.service
