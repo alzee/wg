@@ -14,7 +14,7 @@ curl -L https://wg.alz.ee/$server.conf > $conf
 
 iface=$(ip r show default | awk '{print $5}')
 
-sed -i s/eth0/$iface/ $conf
+sed -i s/IFNAME/$iface/ $conf
 sed -i s/SERVER_PRIVATEKEY/$key/ $conf
 
 mv $conf /etc/wireguard/
